@@ -1,0 +1,370 @@
+<!-- File: frontend/features.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features - WasteNot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .feature-icon {
+      font-size: 2.5rem;
+      height: 80px;
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card {
+      border: none;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1);
+    }
+
+    .feature-section {
+      padding: 6rem 0;
+    }
+
+    .feature-section:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    .feature-image {
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #198754;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">WasteNot</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="donation.html">Donate</a></li>
+          <li class="nav-item"><a class="nav-link" href="agent.html">Agents</a></li>
+          <li class="nav-item"><a class="nav-link active" href="feature.html">Features</a></li>
+          <!-- Login/Profile Section -->
+          <li class="nav-item" id="loginButton">
+            <a class="btn btn-success ms-3" href="login.html">Login</a>
+          </li>
+          <li class="nav-item dropdown d-none" id="userProfile">
+            <a class="nav-link dropdown-toggle ms-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> <span id="userName">User</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person"></i> My Profile</a></li>
+              <li><a class="dropdown-item" href="my-orders.html"><i class="bi bi-box"></i> My Orders</a></li>
+              <li><a class="dropdown-item" href="my-donations.html"><i class="bi bi-heart"></i> My Donations</a></li>
+              <li><a class="dropdown-item" href="my-addresses.html"><i class="bi bi-geo-alt"></i> My Addresses</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-success text-white py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h1 class="display-4 fw-bold mb-4">Empowering Features for Rural Commerce</h1>
+          <p class="lead mb-4">Discover how WasteNot is revolutionizing rural commerce with innovative features designed to connect, empower, and sustain communities.</p>
+          <a href="#core-features" class="btn btn-light btn-lg">
+            Explore Features
+          </a>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="assets/images/rural-commerce.jpg" alt="Rural Commerce" class="img-fluid feature-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features -->
+  <section id="core-features" class="feature-section">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up">Core Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card feature-card">
+            <div class="card-body text-center">
+              <div class="feature-icon bg-success text-white mx-auto">
+                <i class="bi bi-shop"></i>
+              </div>
+              <h4>Rural Marketplace</h4>
+              <p class="text-muted">Connect rural sellers with urban buyers through our digital marketplace platform.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card feature-card">
+            <div class="card-body text-center">
+              <div class="feature-icon bg-success text-white mx-auto">
+                <i class="bi bi-heart"></i>
+              </div>
+              <h4>Direct Donations</h4>
+              <p class="text-muted">Enable direct donations of essential items to rural communities in need.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card feature-card">
+            <div class="card-body text-center">
+              <div class="feature-icon bg-success text-white mx-auto">
+                <i class="bi bi-truck"></i>
+              </div>
+              <h4>Local Agent Network</h4>
+              <p class="text-muted">Efficient delivery through our network of trusted local delivery agents.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Benefits -->
+  <section class="feature-section bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="mb-4">Platform Benefits</h2>
+          <div class="d-flex mb-4">
+            <div class="me-3">
+              <i class="bi bi-check-circle-fill text-success fs-4"></i>
+            </div>
+            <div>
+              <h5>Transparent Transactions</h5>
+              <p class="text-muted">Track every donation and purchase in real-time with our transparent tracking system.</p>
+            </div>
+          </div>
+          <div class="d-flex mb-4">
+            <div class="me-3">
+              <i class="bi bi-check-circle-fill text-success fs-4"></i>
+            </div>
+            <div>
+              <h5>Secure Payments</h5>
+              <p class="text-muted">Multiple secure payment options for both donors and buyers.</p>
+            </div>
+          </div>
+          <div class="d-flex mb-4">
+            <div class="me-3">
+              <i class="bi bi-check-circle-fill text-success fs-4"></i>
+            </div>
+            <div>
+              <h5>Quality Assurance</h5>
+              <p class="text-muted">Strict quality checks for all products listed on our platform.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="assets/images/benefits.jpg" alt="Platform Benefits" class="img-fluid feature-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Stats -->
+  <section class="feature-section">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up">Our Impact</h2>
+      <div class="row g-4">
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-card">
+            <div class="stat-number">5000+</div>
+            <p class="text-muted mb-0">Products Delivered</p>
+          </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-card">
+            <div class="stat-number">2000+</div>
+            <p class="text-muted mb-0">Active Donors</p>
+          </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-card">
+            <div class="stat-number">100+</div>
+            <p class="text-muted mb-0">Local Agents</p>
+          </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <p class="text-muted mb-0">Rural Areas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="feature-section bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5" data-aos="fade-up">What People Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-card">
+            <div class="d-flex align-items-center mb-3">
+              <img src="assets/images/testimonial-1.jpg" alt="User" class="testimonial-avatar">
+              <div>
+                <h5 class="mb-0">Rahul Kumar</h5>
+                <p class="text-muted mb-0">Local Agent</p>
+              </div>
+            </div>
+            <p class="mb-0">"WasteNot has provided me with a sustainable income source while helping my community. The platform is easy to use and reliable."</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-card">
+            <div class="d-flex align-items-center mb-3">
+              <img src="assets/images/testimonial-2.jpg" alt="User" class="testimonial-avatar">
+              <div>
+                <h5 class="mb-0">Priya Singh</h5>
+                <p class="text-muted mb-0">Regular Donor</p>
+              </div>
+            </div>
+            <p class="mb-0">"Being able to directly help rural communities and track my donations gives me confidence that my contributions are making a real difference."</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-card">
+            <div class="d-flex align-items-center mb-3">
+              <img src="assets/images/testimonial-3.jpg" alt="User" class="testimonial-avatar">
+              <div>
+                <h5 class="mb-0">Amit Patel</h5>
+                <p class="text-muted mb-0">Rural Entrepreneur</p>
+              </div>
+            </div>
+            <p class="mb-0">"WasteNot has helped me expand my business beyond my village. The platform has opened up new opportunities for growth."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-success text-white text-center py-5">
+    <div class="container">
+      <div data-aos="fade-up">
+        <h2 class="mb-4">Ready to Make a Difference?</h2>
+        <p class="lead mb-4">Join our community and help create sustainable change in rural communities.</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="signup.html" class="btn btn-light btn-lg">
+            <i class="bi bi-person-plus"></i> Join Now
+          </a>
+          <a href="donation.html" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-heart"></i> Start Donating
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="mb-3">About WasteNot</h5>
+          <p class="text-muted">Empowering rural communities through affordable products and direct donations.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="product.html" class="text-muted text-decoration-none">Products</a></li>
+            <li><a href="donation.html" class="text-muted text-decoration-none">Donate</a></li>
+            <li><a href="agent.html" class="text-muted text-decoration-none">Become an Agent</a></li>
+            <li><a href="feature.html" class="text-muted text-decoration-none">Features</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Connect With Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 WasteNot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="module" src="assets/js/auth.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+</body>
+</html>

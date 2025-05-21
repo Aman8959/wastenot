@@ -1,0 +1,1105 @@
+<!-- File: frontend/products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Products - WasteNot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .product-card {
+      border: none;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+      background-color: #f8f9fa;
+    }
+
+    .product-image.placeholder {
+      padding: 1rem;
+      object-fit: contain;
+    }
+
+    .category-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1;
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .wishlist-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .filter-sidebar {
+      position: sticky;
+      top: 20px;
+    }
+
+    .price-range {
+      height: 5px;
+    }
+
+    .cart-preview {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 300px;
+      z-index: 1000;
+      display: none;
+    }
+
+    .cart-preview.show {
+      display: block;
+    }
+
+    .cart-item-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .search-box {
+      border-radius: 25px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .category-filter {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-filter:hover {
+      background-color: #f8f9fa;
+    }
+
+    .category-filter.active {
+      background-color: #198754;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">WasteNot</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="product.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="donation.html">Donate</a></li>
+          <li class="nav-item"><a class="nav-link" href="agent.html">Agents</a></li>
+          <li class="nav-item"><a class="nav-link" href="feature.html">Features</a></li>
+          <li class="nav-item position-relative me-3">
+            <a class="nav-link" href="#" id="cartButton">
+              <i class="bi bi-cart3 fs-5"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                3
+                <span class="visually-hidden">items in cart</span>
+              </span>
+            </a>
+          </li>
+          <!-- Login/Profile Section -->
+          <li class="nav-item" id="loginButton">
+            <a class="btn btn-success ms-3" href="login.html">Login</a>
+          </li>
+          <li class="nav-item dropdown d-none" id="userProfile">
+            <a class="nav-link dropdown-toggle ms-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> <span id="userName">User</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person"></i> My Profile</a></li>
+              <li><a class="dropdown-item" href="my-orders.html"><i class="bi bi-box"></i> My Orders</a></li>
+              <li><a class="dropdown-item" href="my-donations.html"><i class="bi bi-heart"></i> My Donations</a></li>
+              <li><a class="dropdown-item" href="my-addresses.html"><i class="bi bi-geo-alt"></i> My Addresses</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cart Preview -->
+  <div class="cart-preview shadow" id="cartPreview">
+    <div class="card">
+      <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h6 class="mb-0">Shopping Cart (<span id="cartCount">0</span>)</h6>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" id="closeCart"></button>
+      </div>
+      <div class="card-body">
+        <div id="cartItems" class="cart-items">
+          <!-- Cart items will be dynamically added here -->
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between mb-3">
+          <span>Total:</span>
+          <span class="fw-bold" id="cartTotal">₹0</span>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" onclick="proceedToCheckout()">Proceed to Checkout</button>
+          <button class="btn btn-outline-secondary" id="continueShopping">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Categories -->
+  <div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-md-8 mx-auto">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="text" class="form-control border-start-0 search-box" placeholder="Search products...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3">
+        <div class="filter-sidebar card shadow-sm">
+          <div class="card-body">
+            <h5 class="mb-4">Filters</h5>
+            
+            <!-- Categories -->
+            <div class="mb-4">
+              <h6 class="mb-3">Categories</h6>
+              <div class="d-flex flex-column gap-2">
+                <div class="category-filter active rounded p-2">
+                  <i class="bi bi-grid-fill me-2"></i> All Products
+                </div>
+                <div class="category-filter rounded p-2">
+                  <i class="bi bi-basket2-fill me-2"></i> Food & Essentials
+                </div>
+                <div class="category-filter rounded p-2">
+                  <i class="bi bi-book-fill me-2"></i> Education
+                </div>
+                <div class="category-filter rounded p-2">
+                  <i class="bi bi-laptop-fill me-2"></i> Electronics
+                </div>
+                <div class="category-filter rounded p-2">
+                  <i class="bi bi-heart-fill me-2"></i> Healthcare
+                </div>
+              </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="mb-4">
+              <h6 class="mb-3">Price Range</h6>
+              <input type="range" class="form-range price-range" min="0" max="10000" value="5000">
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">₹0</span>
+                <span class="text-muted">₹10,000</span>
+              </div>
+            </div>
+
+            <!-- Sort By -->
+            <div class="mb-4">
+              <h6 class="mb-3">Sort By</h6>
+              <select class="form-select">
+                <option>Newest First</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Most Popular</option>
+              </select>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="mb-4">
+              <h6 class="mb-3">Rating</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rating4" checked>
+                <label class="form-check-label" for="rating4">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  & up
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rating3">
+                <label class="form-check-label" for="rating3">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  & up
+                </label>
+              </div>
+            </div>
+
+            <!-- Apply Filters Button -->
+            <button class="btn btn-success w-100">Apply Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="col-lg-9">
+        <div class="row g-4" id="productsContainer">
+          <!-- Regular Products -->
+          <h3 class="mb-4">All Products</h3>
+
+          <!-- Basic Necessities Section -->
+          <div class="col-12 mb-4">
+            <h4 class="border-bottom pb-2">Basic Necessities</h4>
+          </div>
+
+          <!-- Basic Product 1 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="essentials">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/hygiene-kit.jpg" class="card-img-top product-image" alt="Hygiene Kit" data-product="hygiene">
+                <span class="badge bg-success category-badge">Essentials</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Basic Hygiene Kit</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <small class="text-muted ms-2">(18 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Soap, sanitizer, toothpaste, and other hygiene essentials.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹299</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('hygiene-kit', 'Basic Hygiene Kit', 299, 'hygiene-kit.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Product 2 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="essentials">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/medicine-kit.jpg" class="card-img-top product-image" alt="Medicine Kit" data-product="medicine">
+                <span class="badge bg-success category-badge">Essentials</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Basic Medicine Kit</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-half text-warning"></i>
+                  <small class="text-muted ms-2">(24 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Basic medicines, bandages, and first-aid supplies.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹499</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('medicine-kit', 'Basic Medicine Kit', 499, 'medicine-kit.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Product 3 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="essentials">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/baby-care.jpg" class="card-img-top product-image" alt="Baby Care Kit" data-product="baby">
+                <span class="badge bg-success category-badge">Essentials</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Baby Care Essentials</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <small class="text-muted ms-2">(15 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Diapers, baby powder, oil, and care items.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹699</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('baby-care', 'Baby Care Essentials', 699, 'baby-care.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="food">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/food.jpg" 
+                     class="card-img-top product-image" 
+                     alt="Food Package" 
+                     data-product="grocery-pack">
+                <span class="badge bg-success category-badge">Food & Essentials</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Essential Food Package</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <small class="text-muted ms-2">(24 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Monthly food package containing rice, dal, oil, and other essential items.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹499</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('food-package', 'Essential Food Package', 499, 'food.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="education">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/study-material.jpg" class="card-img-top product-image" alt="Study Materials" onerror="this.src='assets/images/default.svg'">
+                <span class="badge bg-primary category-badge">Education</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Complete Study Kit</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-half text-warning"></i>
+                  <small class="text-muted ms-2">(18 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Complete set of textbooks, notebooks, and stationery for students.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹299</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('study-kit', 'Complete Study Kit', 299, 'study-material.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="col-md-4" data-aos="fade-up" data-category="electronics">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/tablets.jpg" class="card-img-top product-image" alt="Tablet" onerror="this.src='assets/images/default.svg'">
+                <span class="badge bg-info category-badge">Electronics</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Educational Tablet</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <small class="text-muted ms-2">(32 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Basic tablet with educational apps and content pre-installed.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹8,999</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('educational-tablet', 'Educational Tablet', 8999, 'tablets.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Food Product -->
+          <div class="col-md-4" data-aos="fade-up" data-category="food">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/grocery-pack.jpg" 
+                     class="card-img-top product-image" 
+                     alt="Grocery Pack" 
+                     data-product="grocery-pack">
+                <span class="badge bg-success category-badge">Food & Essentials</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Monthly Grocery Pack</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <small class="text-muted ms-2">(15 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Complete monthly grocery pack with all essential items.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹1,499</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('monthly-grocery', 'Monthly Grocery Pack', 1499, 'grocery-pack.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Education Product -->
+          <div class="col-md-4" data-aos="fade-up" data-category="education">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/school-bag.jpg" 
+                     class="card-img-top product-image" 
+                     alt="School Bag" 
+                     data-product="school-bag">
+                <span class="badge bg-primary category-badge">Education</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">School Bag Set</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-half text-warning"></i>
+                  <small class="text-muted ms-2">(22 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Complete school bag set with water bottle and lunch box.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹799</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('school-bag-set', 'School Bag Set', 799, 'school-bag.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Electronics Product -->
+          <div class="col-md-4" data-aos="fade-up" data-category="electronics">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/calculator.jpg" 
+                     class="card-img-top product-image" 
+                     alt="Scientific Calculator" 
+                     data-product="calculator">
+                <span class="badge bg-info category-badge">Electronics</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Scientific Calculator</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <small class="text-muted ms-2">(28 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Advanced scientific calculator for higher studies.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹999</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('calculator', 'Scientific Calculator', 999, 'calculator.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Healthcare Product -->
+          <div class="col-md-4" data-aos="fade-up" data-category="healthcare">
+            <div class="card product-card">
+              <div class="position-relative">
+                <img src="assets/images/first-aid.jpg" 
+                     class="card-img-top product-image" 
+                     alt="First Aid Kit" 
+                     data-product="first-aid">
+                <span class="badge bg-warning category-badge">Healthcare</span>
+                <button class="wishlist-btn">
+                  <i class="bi bi-heart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Advanced First Aid Kit</h5>
+                <div class="mb-2">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-half text-warning"></i>
+                  <small class="text-muted ms-2">(35 reviews)</small>
+                </div>
+                <p class="card-text text-muted">Comprehensive first aid kit for home and travel.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="text-success mb-0">₹1,299</h5>
+                  <button class="btn btn-outline-success" onclick="addToCart('first-aid', 'Advanced First Aid Kit', 1299, 'first-aid.jpg')">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Free Products Section -->
+          <div class="mt-5" id="free-products">
+            <h3 class="mb-3">Free Products (Donation Based)</h3>
+            <p class="text-muted mb-4">These products are available for free to eligible beneficiaries through our donation program.</p>
+            
+            <div class="row g-4">
+              <!-- Free Product 1 -->
+              <div class="col-md-6" data-aos="fade-up" data-category="education">
+                <div class="card product-card">
+                  <div class="position-relative">
+                    <img src="assets/images/study-material.jpg" class="card-img-top product-image" alt="Basic School Kit" data-product="school-kit">
+                    <span class="badge bg-primary category-badge">Education</span>
+                    <div class="badge bg-primary position-absolute m-2">Donation</div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Basic School Kit</h5>
+                    <p class="text-muted mb-2"><small>Includes notebooks, pencils, and basic stationery</small></p>
+                    <div class="mb-3">
+                      <h6 class="mb-2">Eligibility:</h6>
+                      <ul class="small text-muted">
+                        <li>Students from government schools</li>
+                        <li>Family income below poverty line</li>
+                        <li>Age between 6-15 years</li>
+                      </ul>
+                    </div>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+                      Apply for Free Product
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Free Product 2 -->
+              <div class="col-md-6" data-aos="fade-up" data-category="food">
+                <div class="card product-card">
+                  <div class="position-relative">
+                    <img src="assets/images/food.jpg" class="card-img-top product-image" alt="Emergency Food Kit" data-product="food-kit">
+                    <span class="badge bg-success category-badge">Food & Essentials</span>
+                    <div class="badge bg-primary position-absolute m-2">Donation</div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Emergency Food Kit</h5>
+                    <p class="text-muted mb-2"><small>Basic food supplies for one week</small></p>
+                    <div class="mb-3">
+                      <h6 class="mb-2">Eligibility:</h6>
+                      <ul class="small text-muted">
+                        <li>Families affected by natural disasters</li>
+                        <li>Below poverty line households</li>
+                        <li>Single parent families</li>
+                      </ul>
+                    </div>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+                      Apply for Free Product
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Free Product 3 -->
+              <div class="col-md-6" data-aos="fade-up" data-category="clothing">
+                <div class="card product-card">
+                  <div class="position-relative">
+                    <img src="assets/images/winter-clothes.jpg" class="card-img-top product-image" alt="Winter Care Package" data-product="winter-kit">
+                    <span class="badge bg-danger category-badge">Clothing</span>
+                    <div class="badge bg-primary position-absolute m-2">Donation</div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Winter Care Package</h5>
+                    <p class="text-muted mb-2"><small>Warm clothes and blankets for winter</small></p>
+                    <div class="mb-3">
+                      <h6 class="mb-2">Eligibility:</h6>
+                      <ul class="small text-muted">
+                        <li>Residents of cold climate regions</li>
+                        <li>Elderly people above 60 years</li>
+                        <li>Homeless individuals</li>
+                      </ul>
+                    </div>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+                      Apply for Free Product
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Free Product 4 -->
+              <div class="col-md-6" data-aos="fade-up" data-category="electronics">
+                <div class="card product-card">
+                  <div class="position-relative">
+                    <img src="assets/images/tablets.jpg" class="card-img-top product-image" alt="Study Tablet" data-product="tablet">
+                    <span class="badge bg-info category-badge">Electronics</span>
+                    <div class="badge bg-primary position-absolute m-2">Donation</div>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Study Tablet</h5>
+                    <p class="text-muted mb-2"><small>Basic tablet for online education</small></p>
+                    <div class="mb-3">
+                      <h6 class="mb-2">Eligibility:</h6>
+                      <ul class="small text-muted">
+                        <li>Top performing students</li>
+                        <li>Family income below threshold</li>
+                        <li>Recommendation from school</li>
+                      </ul>
+                    </div>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+                      Apply for Free Product
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Eligibility Check Modal -->
+          <div class="modal fade" id="eligibilityModal" tabindex="-1" aria-labelledby="eligibilityModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="eligibilityModalLabel">Check Eligibility & Apply</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="eligibilityForm">
+                    <div class="mb-3">
+                      <label for="fullName" class="form-label">Full Name</label>
+                      <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="age" class="form-label">Age</label>
+                      <input type="number" class="form-control" id="age" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="address" class="form-label">Complete Address</label>
+                      <textarea class="form-control" id="address" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="income" class="form-label">Monthly Family Income</label>
+                      <input type="number" class="form-control" id="income" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="reason" class="form-label">Why do you need this product?</label>
+                      <textarea class="form-control" id="reason" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="documents" class="form-label">Supporting Documents</label>
+                      <input type="file" class="form-control" id="documents" multiple>
+                      <div class="form-text">Please upload income proof, ID proof, or any relevant documents</div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" form="eligibilityForm" class="btn btn-primary">Submit Application</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-5" aria-label="Product navigation">
+          <ul class="pagination justify-content-center" id="pagination">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" id="prevPage">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" id="nextPage">Next</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Checkout Modal -->
+        <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <!-- Delivery Address Section -->
+                  <div class="col-md-6">
+                    <h6 class="mb-3">Delivery Address</h6>
+                    <form id="addressForm">
+                      <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-control" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Street Address</label>
+                        <textarea class="form-control" rows="2" required></textarea>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">City</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">PIN Code</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <select class="form-select" required>
+                          <option value="">Select State</option>
+                          <option>Maharashtra</option>
+                          <option>Delhi</option>
+                          <option>Karnataka</option>
+                          <!-- Add more states -->
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                  
+                  <!-- Order Summary Section -->
+                  <div class="col-md-6">
+                    <h6 class="mb-3">Order Summary</h6>
+                    <div id="checkoutItems">
+                      <!-- Checkout items will be dynamically added here -->
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Subtotal:</span>
+                      <span id="checkoutSubtotal">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Delivery:</span>
+                      <span>₹49</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                      <span class="fw-bold">Total:</span>
+                      <span class="fw-bold" id="checkoutTotal">₹0</span>
+                    </div>
+                    
+                    <!-- Payment Options -->
+                    <h6 class="mb-3">Payment Method</h6>
+                    <div class="mb-3">
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="upi" checked>
+                        <label class="form-check-label" for="upi">
+                          UPI Payment
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="card">
+                        <label class="form-check-label" for="card">
+                          Credit/Debit Card
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="cod">
+                        <label class="form-check-label" for="cod">
+                          Cash on Delivery
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="placeOrder()">Place Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Success Modal -->
+        <div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center py-4">
+                <i class="bi bi-check-circle text-success display-1 mb-3"></i>
+                <h4>Order Placed Successfully!</h4>
+                <p class="text-muted">Your order has been placed successfully. You will receive a confirmation email shortly.</p>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continue Shopping</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="mb-3">About WasteNot</h5>
+          <p class="text-muted">Empowering rural communities through affordable products and direct donations.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="product.html" class="text-muted text-decoration-none">Products</a></li>
+            <li><a href="donation.html" class="text-muted text-decoration-none">Donate</a></li>
+            <li><a href="agent.html" class="text-muted text-decoration-none">Become an Agent</a></li>
+            <li><a href="feature.html" class="text-muted text-decoration-none">Features</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Connect With Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 WasteNot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="module" src="assets/js/auth.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Image loading handler
+    function handleImageError(img) {
+      // First try the product-specific placeholder
+      const productId = img.getAttribute('data-product');
+      if (productId) {
+        img.src = `assets/images/product-placeholders.svg#${productId}`;
+        img.classList.add('placeholder');
+        // If SVG placeholder fails, use default
+        img.onerror = () => {
+          img.src = 'assets/images/default.svg';
+          img.onerror = null; // Prevent infinite loop
+        };
+      } else {
+        // If no product ID, use default directly
+        img.src = 'assets/images/default.svg';
+        img.onerror = null;
+      }
+    }
+
+    // Add error handlers to all product images
+    document.addEventListener('DOMContentLoaded', () => {
+      const productImages = document.querySelectorAll('.product-image');
+      productImages.forEach(img => {
+        img.onerror = () => handleImageError(img);
+      });
+    });
+
+    // Cart Preview Toggle
+    const cartButton = document.getElementById('cartButton');
+    const cartPreview = document.getElementById('cartPreview');
+    const closeCart = document.getElementById('closeCart');
+    const continueShopping = document.getElementById('continueShopping');
+
+    cartButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      cartPreview.classList.toggle('show');
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartPreview.classList.remove('show');
+    });
+
+    continueShopping.addEventListener('click', () => {
+      cartPreview.classList.remove('show');
+    });
+
+    // Category Filter Toggle and Functionality
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const productsContainer = document.getElementById('productsContainer');
+    const products = document.querySelectorAll('[data-category]');
+    const itemsPerPage = 6;
+    let currentPage = 1;
+
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        // Update active state
+        categoryFilters.forEach(f => f.classList.remove('active'));
+        filter.classList.add('active');
+
+        // Get selected category
+        const selectedCategory = filter.textContent.trim().toLowerCase().includes('all') ? 'all' : 
+          filter.textContent.trim().toLowerCase().includes('food') ? 'food' :
+          filter.textContent.trim().toLowerCase().includes('education') ? 'education' :
+          filter.textContent.trim().toLowerCase().includes('electronics') ? 'electronics' :
+          filter.textContent.trim().toLowerCase().includes('healthcare') ? 'healthcare' : '';
+
+        // Filter products
+        products.forEach(product => {
+          if (selectedCategory === 'all' || product.dataset.category === selectedCategory) {
+            product.style.display = '';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+
+        // Reset pagination
+        currentPage = 1;
+        updatePagination();
+      });
+    });
+
+    // Pagination Functionality
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const pageLinks = document.querySelectorAll('.page-link[data-page]');
+
+    function updatePagination() {
+      const visibleProducts = Array.from(products).filter(p => p.style.display !== 'none');
+      const totalPages = Math.ceil(visibleProducts.length / itemsPerPage);
+
+      // Update page numbers
+      pageLinks.forEach((link, index) => {
+        const pageNum = index + 1;
+        link.parentElement.style.display = pageNum <= totalPages ? '' : 'none';
+        link.parentElement.classList.toggle('active', pageNum === currentPage);
+      });
+
+      // Update prev/next buttons
+      prevPageBtn.parentElement.classList.toggle('disabled', currentPage === 1);
+      nextPageBtn.parentElement.classList.toggle('disabled', currentPage === totalPages);
+
+      // Show/hide products based on current page
+      visibleProducts.forEach((product, index) => {
+        const shouldShow = index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage;
+        product.style.display = shouldShow ? '' : 'none';
+      });
+    }
+
+    // Page click handlers
+    pageLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage = parseInt(link.dataset.page);
+        updatePagination();
+      });
+    });
+
+    prevPageBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+      }
+    });
+
+    nextPageBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const visibleProducts = Array.from(products).filter(p => p.style.display !== 'none');
+      const totalPages = Math.ceil(visibleProducts.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        updatePagination();
+      }
+    });
+
+    // Initialize pagination
+    updatePagination();
+
+    // Wishlist Toggle
+    const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+    wishlistButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const icon = button.querySelector('i');
+        icon.classList.toggle('bi-heart');
+        icon.classList.toggle('bi-heart-fill');
+        icon.classList.toggle('text-danger');
+      });
+    });
+  </script>
+</body>
+</html>

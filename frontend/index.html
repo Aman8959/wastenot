@@ -1,0 +1,297 @@
+<!-- File: frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteNot - Empowering Rural Commerce</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">WasteNot</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="donation.html">Donate</a></li>
+          <li class="nav-item"><a class="nav-link" href="agent.html">Agents</a></li>
+          <li class="nav-item"><a class="nav-link" href="feature.html">Features</a></li>
+          <!-- Login/Profile Section -->
+          <li class="nav-item" id="loginButton">
+            <a class="btn btn-success ms-3" href="login.html">Login</a>
+          </li>
+          <!-- User Menu (Shown when logged in) -->
+          <li class="nav-item dropdown d-none" id="userProfile">
+            <a class="nav-link dropdown-toggle ms-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> <span id="userName">User</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person"></i> My Profile</a></li>
+              <li><a class="dropdown-item" href="my-orders.html"><i class="bi bi-box"></i> My Orders</a></li>
+              <li><a class="dropdown-item" href="my-donations.html"><i class="bi bi-heart"></i> My Donations</a></li>
+              <li><a class="dropdown-item" href="my-addresses.html"><i class="bi bi-geo-alt"></i> My Addresses</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-success text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-4">Empowering Rural Commerce</h1>
+      <p class="lead mb-4">Buy essential products or donate directly to those in need — all in one platform.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="product.html" class="btn btn-light btn-lg">
+          <i class="bi bi-cart"></i> Shop Now
+        </a>
+        <a href="donation.html" class="btn btn-outline-light btn-lg">
+          <i class="bi bi-heart"></i> Donate
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-md-3">
+          <div class="display-4 fw-bold text-success mb-2">5000+</div>
+          <p class="text-muted">Products Delivered</p>
+        </div>
+        <div class="col-md-3">
+          <div class="display-4 fw-bold text-success mb-2">2000+</div>
+          <p class="text-muted">Active Donors</p>
+        </div>
+        <div class="col-md-3">
+          <div class="display-4 fw-bold text-success mb-2">100+</div>
+          <p class="text-muted">Local Agents</p>
+        </div>
+        <div class="col-md-3">
+          <div class="display-4 fw-bold text-success mb-2">50+</div>
+          <p class="text-muted">Rural Areas Covered</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Why Choose WasteNot?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center p-4">
+              <div class="display-4 text-success mb-3">
+                <i class="bi bi-tags"></i>
+              </div>
+              <h4>Affordable Products</h4>
+              <p class="text-muted">High-quality items at low prices for rural communities.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center p-4">
+              <div class="display-4 text-success mb-3">
+                <i class="bi bi-heart"></i>
+              </div>
+              <h4>Direct Donations</h4>
+              <p class="text-muted">Donate essentials directly to underserved people with transparency.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center p-4">
+              <div class="display-4 text-success mb-3">
+                <i class="bi bi-truck"></i>
+              </div>
+              <h4>Agent-Based Delivery</h4>
+              <p class="text-muted">Empowering local agents to deliver products quickly and efficiently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Products</h2>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-success position-absolute m-2">New</div>
+            <img src="assets/images/food.jpg" class="card-img-top" alt="Food Package" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Food Package</h5>
+              <p class="text-success fw-bold">₹499</p>
+              <a href="product.html" class="btn btn-outline-success w-100">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-danger position-absolute m-2">Sale</div>
+            <img src="assets/images/winter-clothes.jpg" class="card-img-top" alt="Winter Clothes" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Winter Wear</h5>
+              <p class="text-success fw-bold">₹999</p>
+              <a href="product.html" class="btn btn-outline-success w-100">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="assets/images/study-material.jpg" class="card-img-top" alt="Study Materials" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Study Materials</h5>
+              <p class="text-success fw-bold">₹299</p>
+              <a href="product.html" class="btn btn-outline-success w-100">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="assets/images/tablets.jpg" class="card-img-top" alt="Basic Tablet" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Basic Tablet</h5>
+              <p class="text-success fw-bold">₹8,999</p>
+              <a href="product.html" class="btn btn-outline-success w-100">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Donation Products -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-3">Free Products</h2>
+      <p class="text-center text-muted mb-5">These products are available for free to eligible beneficiaries through our donation program</p>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-primary position-absolute m-2">Donation</div>
+            <img src="assets/images/study-material.jpg" class="card-img-top" alt="Basic School Kit" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Basic School Kit</h5>
+              <p class="text-muted mb-2"><small>Includes notebooks, pencils, and basic stationery</small></p>
+              <p class="text-primary fw-bold mb-3">Free for Eligible Students</p>
+              <a href="product.html#free-products" class="btn btn-primary w-100">Check Eligibility</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-primary position-absolute m-2">Donation</div>
+            <img src="assets/images/food.jpg" class="card-img-top" alt="Emergency Food Kit" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Emergency Food Kit</h5>
+              <p class="text-muted mb-2"><small>Basic food supplies for one week</small></p>
+              <p class="text-primary fw-bold mb-3">Free for Eligible Families</p>
+              <a href="product.html#free-products" class="btn btn-primary w-100">Check Eligibility</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-primary position-absolute m-2">Donation</div>
+            <img src="assets/images/winter-clothes.jpg" class="card-img-top" alt="Winter Care Package" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Winter Care Package</h5>
+              <p class="text-muted mb-2"><small>Warm clothes and blankets for winter</small></p>
+              <p class="text-primary fw-bold mb-3">Free for Eligible Recipients</p>
+              <a href="product.html#free-products" class="btn btn-primary w-100">Check Eligibility</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="badge bg-primary position-absolute m-2">Donation</div>
+            <img src="assets/images/tablets.jpg" class="card-img-top" alt="Study Tablet" onerror="this.src='assets/images/default.svg'">
+            <div class="card-body">
+              <h5 class="card-title">Study Tablet</h5>
+              <p class="text-muted mb-2"><small>Basic tablet for online education</small></p>
+              <p class="text-primary fw-bold mb-3">Free for Top Students</p>
+              <a href="product.html#free-products" class="btn btn-primary w-100">Check Eligibility</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-success text-white text-center">
+    <div class="container">
+      <h2 class="mb-4">Ready to Make a Difference?</h2>
+      <p class="lead mb-4">Join our community of donors and help create positive change.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="signup.html" class="btn btn-light btn-lg">
+          <i class="bi bi-person-plus"></i> Join Now
+        </a>
+        <a href="agent.html" class="btn btn-outline-light btn-lg">
+          <i class="bi bi-truck"></i> Become an Agent
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="mb-3">About WasteNot</h5>
+          <p class="text-muted">Empowering rural communities through affordable products and direct donations.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="product.html" class="text-muted text-decoration-none">Products</a></li>
+            <li><a href="donation.html" class="text-muted text-decoration-none">Donate</a></li>
+            <li><a href="agent.html" class="text-muted text-decoration-none">Become an Agent</a></li>
+            <li><a href="feature.html" class="text-muted text-decoration-none">Features</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Connect With Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 WasteNot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="assets/js/auth.js"></script>
+</body>
+</html>
